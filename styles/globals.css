@@ -1,26 +1,146 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 * {
   box-sizing: border-box;
+  margin: 0;
+}
+html,
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  background-color: #1c2833;
+  line-height: 1.2;
+}
+body{
+  display: grid;
+  place-content: center;
+}
+h1 {
+  color: white;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+h2 {
+  margin: 0;
+  margin: 14px;
+}
+p {
+  margin: 0;
+}
+a {
+  cursor: pointer;
+  display: block;
+  word-break: break-all;
+}
+a + a {
+  margin-top: 10px;
+}
+table {
+  color: white;
+}
+tr,
+td {
+  border: 2px solid white;
+  border-spacing: 0px;
+}
+td:first-child {
+  text-transform: capitalize;
+  text-align: left;
+  font-weight: bold;
+}
+td {
+  max-width: 400px;
+  min-width: 200px;
+  padding: 8px;
+}
+.highlight{
+  background-color: darkgreen;
+}
+.container {
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.apps {
+  max-width: 90vw;
+  overflow-x: auto;
+}
+.apps::-webkit-scrollbar {
+  height: 8px;
+}
+.apps::-webkit-scrollbar-track {
+  background: #222222;
+  border-radius: 4px;
+}
+.apps::-webkit-scrollbar-thumb {
+  background: #eebc1d;
+  border-radius: 4px;
+}
+.app-container--input {
+  min-width: 500px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+button {
+  border: none;
+  padding: 1em 2em;
+  border-radius: 10px;
+  background-color: #eebc1d;
+  color: white;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  background-color: #222222;
+  cursor:not-allowed;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: #eebc1d;
+}
+input {
+  flex-grow: 1;
+  display: block;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+}
+input:focus {
+  outline: none;
+}
+.loader {
+  border: 4px solid transparent;
+  border-top: 4px solid #eebc1d;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 0.5s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  body {
-    color: white;
-    background: black;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@media screen and (max-width:600px) {
+  .app-container--input{
+    min-width: 0px;
+    width: 100%;
+    flex-direction: column;
+  }
+  .container{
+    padding: 20px;
   }
 }
