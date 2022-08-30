@@ -8,29 +8,6 @@ export default function Index() {
   const [link, setLink] = React.useState("");
   //Sets the largestReviews and highestAverageReviews values
   const [comparisonMap, setComparisonMap] = React.useState(() => new Map());
-
-  React.useEffect(() => compareApps(), [apps]);
-  React.useEffect(() => {
-    if (!link) return;
-    setLink("");
-    setLoading(true);
-    //Get last added app
-    async function getApp() {
-      const result = await fetch(`/api/info?url=${links[links.length - 1]}`, {
-        method: "GET",
-      });
-      if (result.ok) {
-        const app = await result.json();
-        setApps((prev) => [...prev, app]);
-      } else {
-        alert("Please enter a valid shopify app url");
-      }
-    }
-    getApp()
-      .then(() => {})
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  }, [links]);
   const compareApps = () => {
     const map = new Map();
     map.set("largestReviews", 0);
@@ -55,6 +32,29 @@ export default function Index() {
     if (links.includes(formatted)) alert("Duplicate App detected");
     else setLinks((links) => [...links, formatted]);
   };
+  React.useEffect(() => compareApps(), [apps]);
+  React.useEffect(() => {
+    if (!link) return;
+    setLink("");
+    setLoading(true);
+    //Get last added app
+    async function getApp() {
+      const result = await fetch(`/api/info?url=${links[links.length - 1]}`, {
+        method: "GET",
+      });
+      if (result.ok) {
+        const app = await result.json();
+        setApps((prev) => [...prev, app]);
+      } else {
+        alert("Please enter a valid shopify app url");
+      }
+    }
+    getApp()
+      .then(() => {})
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
+  }, [links]);
+
   return (
     <div className="container">
       <h1>Shopify App Comparison</h1>
@@ -81,7 +81,7 @@ export default function Index() {
                     <td></td>
                     {apps.map((app, index) => (
                       <td key={`${app.imageLogo} ${index}`}>
-                        <img src={app.imageLogo} />
+                        <img alt="app logo" src={app.imageLogo} />
                       </td>
                     ))}
                   </tr>
@@ -109,12 +109,12 @@ export default function Index() {
                             }`}
                           >
                             {key == "creator" ? (
-                              <a target="_blank" href={app["creatorUrl"]}>
+                              <a rel="noreferrer" target="_blank" href={app["creatorUrl"]}>
                                 {app[key]}
                               </a>
                             ) : key == "similarApps" ? (
-                              app[key].map((similarApp) => (
-                                <a target="_blank" href={similarApp.link}>
+                              app[key].map((similarApp,i) => (
+                                <a key={`${similarApp.link} ${i}`} rel="noreferrer" target="_blank" href={similarApp.link}>
                                   {similarApp.name}
                                 </a>
                               ))
