@@ -1,4 +1,3 @@
-const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 
 export default async function handler(req, res) {
@@ -20,12 +19,6 @@ const loadSimplePageContents = async (shopifyAppUrl) => {
   if (result.ok) {
     return await result.text();
   }
-};
-const loadPuppeteerPageContents = async (shopifyAppUrl) => {
-  const browser = await puppeteer.launch();
-  const newPage = await browser.newPage();
-  await newPage.goto(shopifyAppUrl, { waitUntil: "networkidle2" });
-  const shopifyPageContent = await newPage.content();
 };
 
 const formatTotalReviews = (reviews) => {
