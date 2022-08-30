@@ -12,6 +12,7 @@ Install dependencies by running the following command:
 ```
 npm i
 ```
+### Running local server:
 
 Run the server by running the following command:
 
